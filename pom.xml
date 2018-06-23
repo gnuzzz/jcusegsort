@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.albemuth.jcuda</groupId>
+    <artifactId>jcusegsort-parent</artifactId>
+    <version>0.8.0</version>
+
+    <packaging>pom</packaging>
+    <name>jcusegsort parent</name>
+
+    <modules>
+        <module>jcusegsort</module>
+        <module>natives</module>
+    </modules>
+
+    <profiles>
+        <profile>
+            <id>windows-x86_64</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jcuda.os>windows</jcuda.os>
+                <jcuda.arch>x86_64</jcuda.arch>
+                <jcuda.ext>dll</jcuda.ext>
+                <jcuda.prefix></jcuda.prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux-x86_64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jcuda.os>linux</jcuda.os>
+                <jcuda.arch>x86_64</jcuda.arch>
+                <jcuda.ext>so</jcuda.ext>
+                <jcuda.prefix>lib</jcuda.prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>apple-x86_64</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                    <arch>x86_64</arch>
+                </os>
+            </activation>
+            <properties>
+                <jcuda.os>apple</jcuda.os>
+                <jcuda.arch>x86_64</jcuda.arch>
+                <jcuda.ext>dylib</jcuda.ext>
+                <jcuda.prefix>lib</jcuda.prefix>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux-ppc_64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>ppc64le</arch>
+                </os>
+            </activation>
+            <properties>
+                <jcuda.os>linux</jcuda.os>
+                <jcuda.arch>ppc_64</jcuda.arch>
+                <jcuda.ext>so</jcuda.ext>
+                <jcuda.prefix>lib</jcuda.prefix>
+            </properties>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central Repository</name>
+            <layout>default</layout>
+            <url>http://repo.maven.apache.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+</project>

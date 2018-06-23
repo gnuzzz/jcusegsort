@@ -1,0 +1,3 @@
+[submodule "natives/jni/bb_segsort"]
+	path = natives/jni/bb_segsort
+	url = https://github.com/gnuzzz/cusegsort.git

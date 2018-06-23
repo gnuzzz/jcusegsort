@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ru.albemuth.jcuda</groupId>
+        <artifactId>jcusegsort-parent</artifactId>
+        <version>0.8.0</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>jcusegsort-natives</artifactId>
+
+    <packaging>pom</packaging>
+    <name>jcusegsort natives</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>create-native-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classesDirectory>nativeLibraries\${jcuda.os}\${jcuda.arch}</classesDirectory>
+                            <classifier>${jcuda.os}-${jcuda.arch}</classifier>
+                            <includes>
+                                <include>lib/*.dll</include>
+                                <include>lib/*.so</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+</project>
