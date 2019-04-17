@@ -16,7 +16,7 @@
 
 #include "key_value_sort_context.h"
 #include "key_value_sort_context.hpp"
-#include "bb/kv/bb_context.h"
+#include "bb/kv/bb_context.hpp"
 #include "jcusegsort.h"
 #include "datatype.h"
 
