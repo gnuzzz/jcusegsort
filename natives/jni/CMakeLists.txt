@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project(jcusegsort)
 
-set(PROJECT_VERSION 0.8.0)
+set(PROJECT_VERSION 0.8.1)
 
 if(CMAKE_HOST_WIN32)
     set(PROJECT_OS "windows")
@@ -58,6 +58,9 @@ FIND_PACKAGE(JNI REQUIRED)
 
 set(CUDA_NVCC_FLAGS -arch=sm_35 --expt-relaxed-constexpr)
 set(CMAKE_CXX_STANDARD 11)
+if(CMAKE_HOST_UNIX)
+    set(CMAKE_CXX_FLAGS "-fPIC " )
+endif()
 
 INCLUDE(FindCUDA)
 include_directories(${JNI_INCLUDE_DIRS})
@@ -100,7 +103,9 @@ cuda_add_library(${PROJECT_NAME}-cuda
         bb_segsort/bb/segments/bb_bin.hpp
         bb_segsort/bb/bb_comput_l.hpp
         bb_segsort/bb/bb_comput_s.hpp
+        bb_segsort/bb/bb_numeric_limits.hpp
         bb_segsort/bb/bb_util.hpp
+        src/sort.h
         src/jcusegsort.h
         src/jcusegsort.cu)
 
@@ -114,6 +119,7 @@ add_library(${PROJECT_NAME} SHARED
         src/key_value_sort_context.hpp
         src/sorting.cpp
         src/sorting.h
+        src/sort.h
         src/jcusegsort.cpp
         src/jcusegsort.h)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-cuda)

@@ -12,12 +12,15 @@
 *
 */
 
+#include <jni.h>
+
 #include "bb/segments/kv/bb_segsort.hpp"
 #include "bb/segments/k/bb_segsort.hpp"
 #include "bb/matrix/kv/bb_segsort.hpp"
 #include "bb/matrix/k/bb_segsort.hpp"
 
-#include "jcusegsort.h"
+#include "datatype.h"
+
 
 template <class K>
 int sort_matrix(K* key, int rows, int cols, const bb::k::SortContext<K>* context) {
@@ -164,582 +167,594 @@ int sort_segments(K* key, V* val, int* seg, int n, int length) {
   return sort_segments(key, val, seg, n, length, &context_kv);
 }
 
-///////////////// sort keys matrix /////////////////////////////////////////////////
-int sort_matrix_unsigned_char(unsigned char *key, int rows, int cols) {
-  return sort_matrix<unsigned char>(key, rows, cols);
-}
-
-int sort_matrix_char(char *key, int rows, int cols) {
-  return sort_matrix<char>(key, rows, cols);
-}
-
-int sort_matrix_unsigned_short(unsigned short *key, int rows, int cols) {
-  return sort_matrix<unsigned short>(key, rows, cols);
-}
-
-int sort_matrix_short(short *key, int rows, int cols) {
-  return sort_matrix<short>(key, rows, cols);
-}
-
-int sort_matrix_int(int *key, int rows, int cols) {
-  return sort_matrix<int>(key, rows, cols);
-}
-
-int sort_matrix_long_long_int(long long int *key, int rows, int cols) {
-  return sort_matrix<long long int>(key, rows, cols);
-}
-
-int sort_matrix_float(float *key, int rows, int cols) {
-  return sort_matrix<float>(key, rows, cols);
-}
-
-int sort_matrix_double(double *key, int rows, int cols) {
-  return sort_matrix<double>(key, rows, cols);
-}
-
-///////////////// sort key-value pairs matrix ///////////////////////////////////////////
-int sort_matrix_unsigned_char_unsigned_char(unsigned char *key, unsigned char *val, int rows, int cols) {
-  return sort_matrix<unsigned char, unsigned char>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_char_char(unsigned char *key, char *val, int rows, int cols) {
-  return sort_matrix<unsigned char, char>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_char_unsigned_short(unsigned char *key, unsigned short *val, int rows, int cols) {
-  return sort_matrix<unsigned char, unsigned short>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_char_short(unsigned char *key, short *val, int rows, int cols) {
-  return sort_matrix<unsigned char, short>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_char_int(unsigned char *key, int *val, int rows, int cols) {
-  return sort_matrix<unsigned char, int>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_char_long_long_int(unsigned char *key, long long int *val, int rows, int cols) {
-  return sort_matrix<unsigned char, long long int>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_char_float(unsigned char *key, float *val, int rows, int cols) {
-  return sort_matrix<unsigned char, float>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_char_double(unsigned char *key, double *val, int rows, int cols) {
-  return sort_matrix<unsigned char, double>(key, val, rows, cols);
-}
-
-int sort_matrix_char_unsigned_char(char *key, unsigned char *val, int rows, int cols) {
-  return sort_matrix<char, unsigned char>(key, val, rows, cols);
-}
-
-int sort_matrix_char_char(char *key, char *val, int rows, int cols) {
-  return sort_matrix<char, char>(key, val, rows, cols);
-}
-
-int sort_matrix_char_unsigned_short(char *key, unsigned short *val, int rows, int cols) {
-  return sort_matrix<char, unsigned short>(key, val, rows, cols);
-}
-
-int sort_matrix_char_short(char *key, short *val, int rows, int cols) {
-  return sort_matrix<char, short>(key, val, rows, cols);
-}
-
-int sort_matrix_char_int(char *key, int *val, int rows, int cols) {
-  return sort_matrix<char, int>(key, val, rows, cols);
-}
-
-int sort_matrix_char_long_long_int(char *key, long long int *val, int rows, int cols) {
-  return sort_matrix<char, long long int>(key, val, rows, cols);
-}
-
-int sort_matrix_char_float(char *key, float *val, int rows, int cols) {
-  return sort_matrix<char, float>(key, val, rows, cols);
-}
-
-int sort_matrix_char_double(char *key, double *val, int rows, int cols) {
-  return sort_matrix<char, double>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_short_unsigned_char(unsigned short *key, unsigned char *val, int rows, int cols) {
-  return sort_matrix<unsigned short, unsigned char>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_short_char(unsigned short *key, char *val, int rows, int cols) {
-  return sort_matrix<unsigned short, char>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_short_unsigned_short(unsigned short *key, unsigned short *val, int rows, int cols) {
-  return sort_matrix<unsigned short, unsigned short>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_short_short(unsigned short *key, short *val, int rows, int cols) {
-  return sort_matrix<unsigned short, short>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_short_int(unsigned short *key, int *val, int rows, int cols) {
-  return sort_matrix<unsigned short, int>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_short_long_long_int(unsigned short *key, long long int *val, int rows, int cols) {
-  return sort_matrix<unsigned short, long long int>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_short_float(unsigned short *key, float *val, int rows, int cols) {
-  return sort_matrix<unsigned short, float>(key, val, rows, cols);
-}
-
-int sort_matrix_unsigned_short_double(unsigned short *key, double *val, int rows, int cols) {
-  return sort_matrix<unsigned short, double>(key, val, rows, cols);
-}
-
-int sort_matrix_short_unsigned_char(short *key, unsigned char *val, int rows, int cols) {
-  return sort_matrix<short, unsigned char>(key, val, rows, cols);
-}
-
-int sort_matrix_short_char(short *key, char *val, int rows, int cols) {
-  return sort_matrix<short, char>(key, val, rows, cols);
-}
-
-int sort_matrix_short_unsigned_short(short *key, unsigned short *val, int rows, int cols) {
-  return sort_matrix<short, unsigned short>(key, val, rows, cols);
-}
-
-int sort_matrix_short_short(short *key, short *val, int rows, int cols) {
-  return sort_matrix<short, short>(key, val, rows, cols);
-}
-
-int sort_matrix_short_int(short *key, int *val, int rows, int cols) {
-  return sort_matrix<short, int>(key, val, rows, cols);
-}
-
-int sort_matrix_short_long_long_int(short *key, long long int *val, int rows, int cols) {
-  return sort_matrix<short, long long int>(key, val, rows, cols);
-}
-
-int sort_matrix_short_float(short *key, float *val, int rows, int cols) {
-  return sort_matrix<short, float>(key, val, rows, cols);
-}
-
-int sort_matrix_short_double(short *key, double *val, int rows, int cols) {
-  return sort_matrix<short, double>(key, val, rows, cols);
-}
-
-int sort_matrix_int_unsigned_char(int *key, unsigned char *val, int rows, int cols) {
-  return sort_matrix<int, unsigned char>(key, val, rows, cols);
-}
-
-int sort_matrix_int_char(int *key, char *val, int rows, int cols) {
-  return sort_matrix<int, char>(key, val, rows, cols);
-}
-
-int sort_matrix_int_unsigned_short(int *key, unsigned short *val, int rows, int cols) {
-  return sort_matrix<int, unsigned short>(key, val, rows, cols);
-}
-
-int sort_matrix_int_short(int *key, short *val, int rows, int cols) {
-  return sort_matrix<int, short>(key, val, rows, cols);
-}
-
-int sort_matrix_int_int(int *key, int *val, int rows, int cols) {
-  return sort_matrix<int, int>(key, val, rows, cols);
-}
-
-int sort_matrix_int_long_long_int(int *key, long long int *val, int rows, int cols) {
-  return sort_matrix<int, long long int>(key, val, rows, cols);
-}
-
-int sort_matrix_int_float(int *key, float *val, int rows, int cols) {
-  return sort_matrix<int, float>(key, val, rows, cols);
-}
-
-int sort_matrix_int_double(int *key, double *val, int rows, int cols) {
-  return sort_matrix<int, double>(key, val, rows, cols);
-}
-
-int sort_matrix_long_long_int_unsigned_char(long long int *key, unsigned char *val, int rows, int cols) {
-  return sort_matrix<long long int, unsigned char>(key, val, rows, cols);
-}
-
-int sort_matrix_long_long_int_char(long long int *key, char *val, int rows, int cols) {
-  return sort_matrix<long long int, char>(key, val, rows, cols);
-}
-
-int sort_matrix_long_long_int_unsigned_short(long long int *key, unsigned short *val, int rows, int cols) {
-  return sort_matrix<long long int, unsigned short>(key, val, rows, cols);
-}
-
-int sort_matrix_long_long_int_short(long long int *key, short *val, int rows, int cols) {
-  return sort_matrix<long long int, short>(key, val, rows, cols);
-}
-
-int sort_matrix_long_long_int_int(long long int *key, int *val, int rows, int cols) {
-  return sort_matrix<long long int, int>(key, val, rows, cols);
-}
-
-int sort_matrix_long_long_int_long_long_int(long long int *key, long long int *val, int rows, int cols) {
-  return sort_matrix<long long int, long long int>(key, val, rows, cols);
-}
-
-int sort_matrix_long_long_int_float(long long int *key, float *val, int rows, int cols) {
-  return sort_matrix<long long int, float>(key, val, rows, cols);
-}
-
-int sort_matrix_long_long_int_double(long long int *key, double *val, int rows, int cols) {
-  return sort_matrix<long long int, double>(key, val, rows, cols);
-}
-
-int sort_matrix_float_unsigned_char(float *key, unsigned char *val, int rows, int cols) {
-  return sort_matrix<float, unsigned char>(key, val, rows, cols);
-}
-
-int sort_matrix_float_char(float *key, char *val, int rows, int cols) {
-  return sort_matrix<float, char>(key, val, rows, cols);
-}
-
-int sort_matrix_float_unsigned_short(float *key, unsigned short *val, int rows, int cols) {
-  return sort_matrix<float, unsigned short>(key, val, rows, cols);
-}
-
-int sort_matrix_float_short(float *key, short *val, int rows, int cols) {
-  return sort_matrix<float, short>(key, val, rows, cols);
-}
-
-int sort_matrix_float_int(float *key, int *val, int rows, int cols) {
-  return sort_matrix<float, int>(key, val, rows, cols);
-}
-
-int sort_matrix_float_long_long_int(float *key, long long int *val, int rows, int cols) {
-  return sort_matrix<float, long long int>(key, val, rows, cols);
-}
-
-int sort_matrix_float_float(float *key, float *val, int rows, int cols) {
-  return sort_matrix<float, float>(key, val, rows, cols);
-}
-
-int sort_matrix_float_double(float *key, double *val, int rows, int cols) {
-  return sort_matrix<float, double>(key, val, rows, cols);
-}
-
-int sort_matrix_double_unsigned_char(double *key, unsigned char *val, int rows, int cols) {
-  return sort_matrix<double, unsigned char>(key, val, rows, cols);
-}
-
-int sort_matrix_double_char(double *key, char *val, int rows, int cols) {
-  return sort_matrix<double, char>(key, val, rows, cols);
-}
-
-int sort_matrix_double_unsigned_short(double *key, unsigned short *val, int rows, int cols) {
-  return sort_matrix<double, unsigned short>(key, val, rows, cols);
-}
-
-int sort_matrix_double_short(double *key, short *val, int rows, int cols) {
-  return sort_matrix<double, short>(key, val, rows, cols);
-}
-
-int sort_matrix_double_int(double *key, int *val, int rows, int cols) {
-  return sort_matrix<double, int>(key, val, rows, cols);
-}
-
-int sort_matrix_double_long_long_int(double *key, long long int *val, int rows, int cols) {
-  return sort_matrix<double, long long int>(key, val, rows, cols);
-}
-
-int sort_matrix_double_float(double *key, float *val, int rows, int cols) {
-  return sort_matrix<double, float>(key, val, rows, cols);
-}
-
-int sort_matrix_double_double(double *key, double *val, int rows, int cols) {
-  return sort_matrix<double, double>(key, val, rows, cols);
-}
-
-///////////////// sort keys by segments /////////////////////////////////////////////////
-int sort_segments_unsigned_char(unsigned char *key, int* seg, int n, int length) {
-  return sort_segments<unsigned char>(key, seg, n, length);
-}
-
-int sort_segments_char(char *key, int* seg, int n, int length) {
-  return sort_segments<char>(key, seg, n, length);
-}
-
-int sort_segments_unsigned_short(unsigned short *key, int* seg, int n, int length) {
-  return sort_segments<unsigned short>(key, seg, n, length);
-}
-
-int sort_segments_short(short *key, int* seg, int n, int length) {
-  return sort_segments<short>(key, seg, n, length);
-}
-
-int sort_segments_int(int *key, int* seg, int n, int length) {
-  return sort_segments<int>(key, seg, n, length);
-}
-
-int sort_segments_long_long_int(long long int *key, int* seg, int n, int length) {
-  return sort_segments<long long int>(key, seg, n, length);
-}
-
-int sort_segments_float(float *key, int* seg, int n, int length) {
-  return sort_segments<float>(key, seg, n, length);
-}
-
-int sort_segments_double(double *key, int* seg, int n, int length) {
-  return sort_segments<double>(key, seg, n, length);
-}
-
-///////////////// sort key-value pairs by segments ///////////////////////////////////////////
-int sort_segments_unsigned_char_unsigned_char(unsigned char *key, unsigned char *val, int *seg, int n, int length) {
-  return sort_segments<unsigned char, unsigned char>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_char_char(unsigned char *key, char *val, int *seg, int n, int length) {
-  return sort_segments<unsigned char, char>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_char_unsigned_short(unsigned char *key, unsigned short *val, int *seg, int n, int length) {
-  return sort_segments<unsigned char, unsigned short>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_char_short(unsigned char *key, short *val, int *seg, int n, int length) {
-  return sort_segments<unsigned char, short>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_char_int(unsigned char *key, int *val, int *seg, int n, int length) {
-  return sort_segments<unsigned char, int>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_char_long_long_int(unsigned char *key, long long int *val, int *seg, int n, int length) {
-  return sort_segments<unsigned char, long long int>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_char_float(unsigned char *key, float *val, int *seg, int n, int length) {
-  return sort_segments<unsigned char, float>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_char_double(unsigned char *key, double *val, int *seg, int n, int length) {
-  return sort_segments<unsigned char, double>(key, val, seg, n, length);
-}
-
-int sort_segments_char_unsigned_char(char *key, unsigned char *val, int *seg, int n, int length) {
-  return sort_segments<char, unsigned char>(key, val, seg, n, length);
-}
-
-int sort_segments_char_char(char *key, char *val, int *seg, int n, int length) {
-  return sort_segments<char, char>(key, val, seg, n, length);
-}
-
-int sort_segments_char_unsigned_short(char *key, unsigned short *val, int *seg, int n, int length) {
-  return sort_segments<char, unsigned short>(key, val, seg, n, length);
-}
-
-int sort_segments_char_short(char *key, short *val, int *seg, int n, int length) {
-  return sort_segments<char, short>(key, val, seg, n, length);
-}
-
-int sort_segments_char_int(char *key, int *val, int *seg, int n, int length) {
-  return sort_segments<char, int>(key, val, seg, n, length);
-}
-
-int sort_segments_char_long_long_int(char *key, long long int *val, int *seg, int n, int length) {
-  return sort_segments<char, long long int>(key, val, seg, n, length);
-}
-
-int sort_segments_char_float(char *key, float *val, int *seg, int n, int length) {
-  return sort_segments<char, float>(key, val, seg, n, length);
-}
-
-int sort_segments_char_double(char *key, double *val, int *seg, int n, int length) {
-  return sort_segments<char, double>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_short_unsigned_char(unsigned short *key, unsigned char *val, int *seg, int n, int length) {
-  return sort_segments<unsigned short, unsigned char>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_short_char(unsigned short *key, char *val, int *seg, int n, int length) {
-  return sort_segments<unsigned short, char>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_short_unsigned_short(unsigned short *key, unsigned short *val, int *seg, int n, int length) {
-  return sort_segments<unsigned short, unsigned short>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_short_short(unsigned short *key, short *val, int *seg, int n, int length) {
-  return sort_segments<unsigned short, short>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_short_int(unsigned short *key, int *val, int *seg, int n, int length) {
-  return sort_segments<unsigned short, int>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_short_long_long_int(unsigned short *key, long long int *val, int *seg, int n, int length) {
-  return sort_segments<unsigned short, long long int>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_short_float(unsigned short *key, float *val, int *seg, int n, int length) {
-  return sort_segments<unsigned short, float>(key, val, seg, n, length);
-}
-
-int sort_segments_unsigned_short_double(unsigned short *key, double *val, int *seg, int n, int length) {
-  return sort_segments<unsigned short, double>(key, val, seg, n, length);
-}
-
-int sort_segments_short_unsigned_char(short *key, unsigned char *val, int *seg, int n, int length) {
-  return sort_segments<short, unsigned char>(key, val, seg, n, length);
-}
-
-int sort_segments_short_char(short *key, char *val, int *seg, int n, int length) {
-  return sort_segments<short, char>(key, val, seg, n, length);
-}
-
-int sort_segments_short_unsigned_short(short *key, unsigned short *val, int *seg, int n, int length) {
-  return sort_segments<short, unsigned short>(key, val, seg, n, length);
-}
-
-int sort_segments_short_short(short *key, short *val, int *seg, int n, int length) {
-  return sort_segments<short, short>(key, val, seg, n, length);
-}
-
-int sort_segments_short_int(short *key, int *val, int *seg, int n, int length) {
-  return sort_segments<short, int>(key, val, seg, n, length);
-}
-
-int sort_segments_short_long_long_int(short *key, long long int *val, int *seg, int n, int length) {
-  return sort_segments<short, long long int>(key, val, seg, n, length);
-}
-
-int sort_segments_short_float(short *key, float *val, int *seg, int n, int length) {
-  return sort_segments<short, float>(key, val, seg, n, length);
-}
-
-int sort_segments_short_double(short *key, double *val, int *seg, int n, int length) {
-  return sort_segments<short, double>(key, val, seg, n, length);
-}
-
-int sort_segments_int_unsigned_char(int *key, unsigned char *val, int *seg, int n, int length) {
-  return sort_segments<int, unsigned char>(key, val, seg, n, length);
-}
-
-int sort_segments_int_char(int *key, char *val, int *seg, int n, int length) {
-  return sort_segments<int, char>(key, val, seg, n, length);
-}
-
-int sort_segments_int_unsigned_short(int *key, unsigned short *val, int *seg, int n, int length) {
-  return sort_segments<int, unsigned short>(key, val, seg, n, length);
-}
-
-int sort_segments_int_short(int *key, short *val, int *seg, int n, int length) {
-  return sort_segments<int, short>(key, val, seg, n, length);
-}
-
-int sort_segments_int_int(int *key, int *val, int *seg, int n, int length) {
-  return sort_segments<int, int>(key, val, seg, n, length);
-}
-
-int sort_segments_int_long_long_int(int *key, long long int *val, int *seg, int n, int length) {
-  return sort_segments<int, long long int>(key, val, seg, n, length);
-}
-
-int sort_segments_int_float(int *key, float *val, int *seg, int n, int length) {
-  return sort_segments<int, float>(key, val, seg, n, length);
-}
-
-int sort_segments_int_double(int *key, double *val, int *seg, int n, int length) {
-  return sort_segments<int, double>(key, val, seg, n, length);
-}
-
-int sort_segments_long_long_int_unsigned_char(long long int *key, unsigned char *val, int *seg, int n, int length) {
-  return sort_segments<long long int, unsigned char>(key, val, seg, n, length);
-}
-
-int sort_segments_long_long_int_char(long long int *key, char *val, int *seg, int n, int length) {
-  return sort_segments<long long int, char>(key, val, seg, n, length);
-}
-
-int sort_segments_long_long_int_unsigned_short(long long int *key, unsigned short *val, int *seg, int n, int length) {
-  return sort_segments<long long int, unsigned short>(key, val, seg, n, length);
-}
-
-int sort_segments_long_long_int_short(long long int *key, short *val, int *seg, int n, int length) {
-  return sort_segments<long long int, short>(key, val, seg, n, length);
-}
-
-int sort_segments_long_long_int_int(long long int *key, int *val, int *seg, int n, int length) {
-  return sort_segments<long long int, int>(key, val, seg, n, length);
-}
-
-int sort_segments_long_long_int_long_long_int(long long int *key, long long int *val, int *seg, int n, int length) {
-  return sort_segments<long long int, long long int>(key, val, seg, n, length);
-}
-
-int sort_segments_long_long_int_float(long long int *key, float *val, int *seg, int n, int length) {
-  return sort_segments<long long int, float>(key, val, seg, n, length);
-}
-
-int sort_segments_long_long_int_double(long long int *key, double *val, int *seg, int n, int length) {
-  return sort_segments<long long int, double>(key, val, seg, n, length);
-}
-
-int sort_segments_float_unsigned_char(float *key, unsigned char *val, int *seg, int n, int length) {
-  return sort_segments<float, unsigned char>(key, val, seg, n, length);
-}
-
-int sort_segments_float_char(float *key, char *val, int *seg, int n, int length) {
-  return sort_segments<float, char>(key, val, seg, n, length);
-}
-
-int sort_segments_float_unsigned_short(float *key, unsigned short *val, int *seg, int n, int length) {
-  return sort_segments<float, unsigned short>(key, val, seg, n, length);
-}
-
-int sort_segments_float_short(float *key, short *val, int *seg, int n, int length) {
-  return sort_segments<float, short>(key, val, seg, n, length);
-}
-
-int sort_segments_float_int(float *key, int *val, int *seg, int n, int length) {
-  return sort_segments<float, int>(key, val, seg, n, length);
-}
-
-int sort_segments_float_long_long_int(float *key, long long int *val, int *seg, int n, int length) {
-  return sort_segments<float, long long int>(key, val, seg, n, length);
-}
-
-int sort_segments_float_float(float *key, float *val, int *seg, int n, int length) {
-  return sort_segments<float, float>(key, val, seg, n, length);
-}
-
-int sort_segments_float_double(float *key, double *val, int *seg, int n, int length) {
-  return sort_segments<float, double>(key, val, seg, n, length);
-}
-
-int sort_segments_double_unsigned_char(double *key, unsigned char *val, int *seg, int n, int length) {
-  return sort_segments<double, unsigned char>(key, val, seg, n, length);
-}
-
-int sort_segments_double_char(double *key, char *val, int *seg, int n, int length) {
-  return sort_segments<double, char>(key, val, seg, n, length);
-}
-
-int sort_segments_double_unsigned_short(double *key, unsigned short *val, int *seg, int n, int length) {
-  return sort_segments<double, unsigned short>(key, val, seg, n, length);
-}
-
-int sort_segments_double_short(double *key, short *val, int *seg, int n, int length) {
-  return sort_segments<double, short>(key, val, seg, n, length);
-}
-
-int sort_segments_double_int(double *key, int *val, int *seg, int n, int length) {
-  return sort_segments<double, int>(key, val, seg, n, length);
-}
-
-int sort_segments_double_long_long_int(double *key, long long int *val, int *seg, int n, int length) {
-  return sort_segments<double, long long int>(key, val, seg, n, length);
-}
-
-int sort_segments_double_float(double *key, float *val, int *seg, int n, int length) {
-  return sort_segments<double, float>(key, val, seg, n, length);
-}
-
-int sort_segments_double_double(double *key, double *val, int *seg, int n, int length) {
-  return sort_segments<double, double>(key, val, seg, n, length);
+jint sort(jlong keys_ptr, jint key_type, jint rows, jint cols, jlong context_ptr) {
+  switch (key_type) {
+    case BOOLEAN: {
+      bb::matrix::k::bb_segsort((unsigned char *) keys_ptr, rows, cols, (bb::k::SortContext<unsigned char> *) context_ptr);
+      break;
+    }
+    case BYTE: {
+      bb::matrix::k::bb_segsort((char *) keys_ptr, rows, cols, (bb::k::SortContext<char> *) context_ptr);
+      break;
+    }
+    case CHAR: {
+      bb::matrix::k::bb_segsort((unsigned short *) keys_ptr, rows, cols, (bb::k::SortContext<unsigned short> *) context_ptr);
+      break;
+    }
+    case SHORT: {
+      bb::matrix::k::bb_segsort((short *) keys_ptr, rows, cols, (bb::k::SortContext<short> *) context_ptr);
+      break;
+    }
+    case INT: {
+      bb::matrix::k::bb_segsort((int *) keys_ptr, rows, cols, (bb::k::SortContext<int> *) context_ptr);
+      break;
+    }
+    case LONG: {
+      bb::matrix::k::bb_segsort((long long int *) keys_ptr, rows, cols, (bb::k::SortContext<long long int> *) context_ptr);
+      break;
+    }
+    case FLOAT: {
+      bb::matrix::k::bb_segsort((float *) keys_ptr, rows, cols, (bb::k::SortContext<float> *) context_ptr);
+      break;
+    }
+    case DOUBLE: {
+      bb::matrix::k::bb_segsort((double *) keys_ptr, rows, cols, (bb::k::SortContext<double> *) context_ptr);
+      break;
+    }
+    default:
+      return JNI_EINVAL;
+  }
+  return JNI_OK;
+}
+
+jint sort(jlong keys_ptr, jint key_type, jint keys_length, jlong segments_ptr, jint segments_length, jlong context_ptr) {
+  switch (key_type) {
+    case BOOLEAN: {
+      bb::segments::k::bb_segsort((unsigned char *) keys_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::k::SortContext<unsigned char> *) context_ptr);
+      break;
+    }
+    case BYTE: {
+      bb::segments::k::bb_segsort((char *) keys_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::k::SortContext<char> *) context_ptr);
+      break;
+    }
+    case CHAR: {
+      bb::segments::k::bb_segsort((unsigned short *) keys_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::k::SortContext<unsigned short> *) context_ptr);
+      break;
+    }
+    case SHORT: {
+      bb::segments::k::bb_segsort((short *) keys_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::k::SortContext<short> *) context_ptr);
+      break;
+    }
+    case INT: {
+      bb::segments::k::bb_segsort((int *) keys_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::k::SortContext<int> *) context_ptr);
+      break;
+    }
+    case LONG: {
+      bb::segments::k::bb_segsort((long long int *) keys_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::k::SortContext<long long int> *) context_ptr);
+      break;
+    }
+    case FLOAT: {
+      bb::segments::k::bb_segsort((float *) keys_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::k::SortContext<float> *) context_ptr);
+      break;
+    }
+    case DOUBLE: {
+      bb::segments::k::bb_segsort((double *) keys_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::k::SortContext<double> *) context_ptr);
+      break;
+    }
+    default:
+      return JNI_EINVAL;
+  }
+  return JNI_OK;
+}
+
+jint sort(jlong keys_ptr, jint key_type, jlong values_ptr, jint value_type, jint rows, jint cols, jlong context_ptr) {
+  switch (key_type) {
+    case BOOLEAN: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::matrix::kv::bb_segsort((unsigned char *) keys_ptr, (unsigned char *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned char, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::matrix::kv::bb_segsort((unsigned char *) keys_ptr, (char *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned char, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::matrix::kv::bb_segsort((unsigned char *) keys_ptr, (unsigned short *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned char, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::matrix::kv::bb_segsort((unsigned char *) keys_ptr, (short *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned char, short> *) context_ptr);
+          break;
+        case INT:
+          bb::matrix::kv::bb_segsort((unsigned char *) keys_ptr, (int *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned char, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::matrix::kv::bb_segsort((unsigned char *) keys_ptr, (long long int *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned char, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::matrix::kv::bb_segsort((unsigned char *) keys_ptr, (float *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned char, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::matrix::kv::bb_segsort((unsigned char *) keys_ptr, (double *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned char, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case BYTE: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::matrix::kv::bb_segsort((char *) keys_ptr, (unsigned char *) values_ptr, rows, cols, (bb::kv::SortContext<char, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::matrix::kv::bb_segsort((char *) keys_ptr, (char *) values_ptr, rows, cols, (bb::kv::SortContext<char, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::matrix::kv::bb_segsort((char *) keys_ptr, (unsigned short *) values_ptr, rows, cols, (bb::kv::SortContext<char, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::matrix::kv::bb_segsort((char *) keys_ptr, (short *) values_ptr, rows, cols, (bb::kv::SortContext<char, short> *) context_ptr);
+          break;
+        case INT:
+          bb::matrix::kv::bb_segsort((char *) keys_ptr, (int *) values_ptr, rows, cols, (bb::kv::SortContext<char, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::matrix::kv::bb_segsort((char *) keys_ptr, (long long int *) values_ptr, rows, cols, (bb::kv::SortContext<char, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::matrix::kv::bb_segsort((char *) keys_ptr, (float *) values_ptr, rows, cols, (bb::kv::SortContext<char, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::matrix::kv::bb_segsort((char *) keys_ptr, (double *) values_ptr, rows, cols, (bb::kv::SortContext<char, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case CHAR: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::matrix::kv::bb_segsort((unsigned short *) keys_ptr, (unsigned char *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned short, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::matrix::kv::bb_segsort((unsigned short *) keys_ptr, (char *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned short, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::matrix::kv::bb_segsort((unsigned short *) keys_ptr, (unsigned short *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned short, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::matrix::kv::bb_segsort((unsigned short *) keys_ptr, (short *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned short, short> *) context_ptr);
+          break;
+        case INT:
+          bb::matrix::kv::bb_segsort((unsigned short *) keys_ptr, (int *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned short, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::matrix::kv::bb_segsort((unsigned short *) keys_ptr, (long long int *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned short, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::matrix::kv::bb_segsort((unsigned short *) keys_ptr, (float *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned short, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::matrix::kv::bb_segsort((unsigned short *) keys_ptr, (double *) values_ptr, rows, cols, (bb::kv::SortContext<unsigned short, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case SHORT: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::matrix::kv::bb_segsort((short *) keys_ptr, (unsigned char *) values_ptr, rows, cols, (bb::kv::SortContext<short, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::matrix::kv::bb_segsort((short *) keys_ptr, (char *) values_ptr, rows, cols, (bb::kv::SortContext<short, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::matrix::kv::bb_segsort((short *) keys_ptr, (unsigned short *) values_ptr, rows, cols, (bb::kv::SortContext<short, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::matrix::kv::bb_segsort((short *) keys_ptr, (short *) values_ptr, rows, cols, (bb::kv::SortContext<short, short> *) context_ptr);
+          break;
+        case INT:
+          bb::matrix::kv::bb_segsort((short *) keys_ptr, (int *) values_ptr, rows, cols, (bb::kv::SortContext<short, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::matrix::kv::bb_segsort((short *) keys_ptr, (long long int *) values_ptr, rows, cols, (bb::kv::SortContext<short, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::matrix::kv::bb_segsort((short *) keys_ptr, (float *) values_ptr, rows, cols, (bb::kv::SortContext<short, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::matrix::kv::bb_segsort((short *) keys_ptr, (double *) values_ptr, rows, cols, (bb::kv::SortContext<short, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case INT: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::matrix::kv::bb_segsort((int *) keys_ptr, (unsigned char *) values_ptr, rows, cols, (bb::kv::SortContext<int, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::matrix::kv::bb_segsort((int *) keys_ptr, (char *) values_ptr, rows, cols, (bb::kv::SortContext<int, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::matrix::kv::bb_segsort((int *) keys_ptr, (unsigned short *) values_ptr, rows, cols, (bb::kv::SortContext<int, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::matrix::kv::bb_segsort((int *) keys_ptr, (short *) values_ptr, rows, cols, (bb::kv::SortContext<int, short> *) context_ptr);
+          break;
+        case INT:
+          bb::matrix::kv::bb_segsort((int *) keys_ptr, (int *) values_ptr, rows, cols, (bb::kv::SortContext<int, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::matrix::kv::bb_segsort((int *) keys_ptr, (long long int *) values_ptr, rows, cols, (bb::kv::SortContext<int, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::matrix::kv::bb_segsort((int *) keys_ptr, (float *) values_ptr, rows, cols, (bb::kv::SortContext<int, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::matrix::kv::bb_segsort((int *) keys_ptr, (double *) values_ptr, rows, cols, (bb::kv::SortContext<int, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case LONG: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::matrix::kv::bb_segsort((long long int *) keys_ptr, (unsigned char *) values_ptr, rows, cols, (bb::kv::SortContext<long long int, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::matrix::kv::bb_segsort((long long int *) keys_ptr, (char *) values_ptr, rows, cols, (bb::kv::SortContext<long long int, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::matrix::kv::bb_segsort((long long int *) keys_ptr, (unsigned short *) values_ptr, rows, cols, (bb::kv::SortContext<long long int, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::matrix::kv::bb_segsort((long long int *) keys_ptr, (short *) values_ptr, rows, cols, (bb::kv::SortContext<long long int, short> *) context_ptr);
+          break;
+        case INT:
+          bb::matrix::kv::bb_segsort((long long int *) keys_ptr, (int *) values_ptr, rows, cols, (bb::kv::SortContext<long long int, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::matrix::kv::bb_segsort((long long int *) keys_ptr, (long long int *) values_ptr, rows, cols, (bb::kv::SortContext<long long int, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::matrix::kv::bb_segsort((long long int *) keys_ptr, (float *) values_ptr, rows, cols, (bb::kv::SortContext<long long int, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::matrix::kv::bb_segsort((long long int *) keys_ptr, (double *) values_ptr, rows, cols, (bb::kv::SortContext<long long int, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case FLOAT: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::matrix::kv::bb_segsort((float *) keys_ptr, (unsigned char *) values_ptr, rows, cols, (bb::kv::SortContext<float, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::matrix::kv::bb_segsort((float *) keys_ptr, (char *) values_ptr, rows, cols, (bb::kv::SortContext<float, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::matrix::kv::bb_segsort((float *) keys_ptr, (unsigned short *) values_ptr, rows, cols, (bb::kv::SortContext<float, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::matrix::kv::bb_segsort((float *) keys_ptr, (short *) values_ptr, rows, cols, (bb::kv::SortContext<float, short> *) context_ptr);
+          break;
+        case INT:
+          bb::matrix::kv::bb_segsort((float *) keys_ptr, (int *) values_ptr, rows, cols, (bb::kv::SortContext<float, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::matrix::kv::bb_segsort((float *) keys_ptr, (long long int *) values_ptr, rows, cols, (bb::kv::SortContext<float, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::matrix::kv::bb_segsort((float *) keys_ptr, (float *) values_ptr, rows, cols, (bb::kv::SortContext<float, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::matrix::kv::bb_segsort((float *) keys_ptr, (double *) values_ptr, rows, cols, (bb::kv::SortContext<float, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case DOUBLE: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::matrix::kv::bb_segsort((double *) keys_ptr, (unsigned char *) values_ptr, rows, cols, (bb::kv::SortContext<double, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::matrix::kv::bb_segsort((double *) keys_ptr, (char *) values_ptr, rows, cols, (bb::kv::SortContext<double, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::matrix::kv::bb_segsort((double *) keys_ptr, (unsigned short *) values_ptr, rows, cols, (bb::kv::SortContext<double, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::matrix::kv::bb_segsort((double *) keys_ptr, (short *) values_ptr, rows, cols, (bb::kv::SortContext<double, short> *) context_ptr);
+          break;
+        case INT:
+          bb::matrix::kv::bb_segsort((double *) keys_ptr, (int *) values_ptr, rows, cols, (bb::kv::SortContext<double, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::matrix::kv::bb_segsort((double *) keys_ptr, (long long int *) values_ptr, rows, cols, (bb::kv::SortContext<double, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::matrix::kv::bb_segsort((double *) keys_ptr, (float *) values_ptr, rows, cols, (bb::kv::SortContext<double, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::matrix::kv::bb_segsort((double *) keys_ptr, (double *) values_ptr, rows, cols, (bb::kv::SortContext<double, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    default:
+      return JNI_EINVAL;
+  }
+  return JNI_OK;
+}
+
+jint sort(jlong keys_ptr, jint key_type, jlong values_ptr, jint value_type, jint keys_length, jlong segments_ptr, jint segments_length, jlong context_ptr) {
+  switch (key_type) {
+    case BOOLEAN: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::segments::kv::bb_segsort((unsigned char *) keys_ptr, (unsigned char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned char, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::segments::kv::bb_segsort((unsigned char *) keys_ptr, (char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned char, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::segments::kv::bb_segsort((unsigned char *) keys_ptr, (unsigned short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned char, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::segments::kv::bb_segsort((unsigned char *) keys_ptr, (short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned char, short> *) context_ptr);
+          break;
+        case INT:
+          bb::segments::kv::bb_segsort((unsigned char *) keys_ptr, (int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned char, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::segments::kv::bb_segsort((unsigned char *) keys_ptr, (long long int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned char, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::segments::kv::bb_segsort((unsigned char *) keys_ptr, (float *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned char, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::segments::kv::bb_segsort((unsigned char *) keys_ptr, (double *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned char, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case BYTE: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::segments::kv::bb_segsort((char *) keys_ptr, (unsigned char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<char, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::segments::kv::bb_segsort((char *) keys_ptr, (char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<char, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::segments::kv::bb_segsort((char *) keys_ptr, (unsigned short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<char, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::segments::kv::bb_segsort((char *) keys_ptr, (short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<char, short> *) context_ptr);
+          break;
+        case INT:
+          bb::segments::kv::bb_segsort((char *) keys_ptr, (int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<char, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::segments::kv::bb_segsort((char *) keys_ptr, (long long int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<char, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::segments::kv::bb_segsort((char *) keys_ptr, (float *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<char, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::segments::kv::bb_segsort((char *) keys_ptr, (double *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<char, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case CHAR: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::segments::kv::bb_segsort((unsigned short *) keys_ptr, (unsigned char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned short, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::segments::kv::bb_segsort((unsigned short *) keys_ptr, (char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned short, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::segments::kv::bb_segsort((unsigned short *) keys_ptr, (unsigned short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned short, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::segments::kv::bb_segsort((unsigned short *) keys_ptr, (short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned short, short> *) context_ptr);
+          break;
+        case INT:
+          bb::segments::kv::bb_segsort((unsigned short *) keys_ptr, (int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned short, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::segments::kv::bb_segsort((unsigned short *) keys_ptr, (long long int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned short, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::segments::kv::bb_segsort((unsigned short *) keys_ptr, (float *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned short, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::segments::kv::bb_segsort((unsigned short *) keys_ptr, (double *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<unsigned short, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case SHORT: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::segments::kv::bb_segsort((short *) keys_ptr, (unsigned char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<short, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::segments::kv::bb_segsort((short *) keys_ptr, (char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<short, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::segments::kv::bb_segsort((short *) keys_ptr, (unsigned short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<short, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::segments::kv::bb_segsort((short *) keys_ptr, (short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<short, short> *) context_ptr);
+          break;
+        case INT:
+          bb::segments::kv::bb_segsort((short *) keys_ptr, (int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<short, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::segments::kv::bb_segsort((short *) keys_ptr, (long long int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<short, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::segments::kv::bb_segsort((short *) keys_ptr, (float *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<short, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::segments::kv::bb_segsort((short *) keys_ptr, (double *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<short, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case INT: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::segments::kv::bb_segsort((int *) keys_ptr, (unsigned char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<int, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::segments::kv::bb_segsort((int *) keys_ptr, (char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<int, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::segments::kv::bb_segsort((int *) keys_ptr, (unsigned short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<int, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::segments::kv::bb_segsort((int *) keys_ptr, (short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<int, short> *) context_ptr);
+          break;
+        case INT:
+          bb::segments::kv::bb_segsort((int *) keys_ptr, (int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<int, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::segments::kv::bb_segsort((int *) keys_ptr, (long long int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<int, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::segments::kv::bb_segsort((int *) keys_ptr, (float *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<int, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::segments::kv::bb_segsort((int *) keys_ptr, (double *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<int, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case LONG: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::segments::kv::bb_segsort((long long int *) keys_ptr, (unsigned char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<long long int, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::segments::kv::bb_segsort((long long int *) keys_ptr, (char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<long long int, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::segments::kv::bb_segsort((long long int *) keys_ptr, (unsigned short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<long long int, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::segments::kv::bb_segsort((long long int *) keys_ptr, (short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<long long int, short> *) context_ptr);
+          break;
+        case INT:
+          bb::segments::kv::bb_segsort((long long int *) keys_ptr, (int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<long long int, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::segments::kv::bb_segsort((long long int *) keys_ptr, (long long int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<long long int, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::segments::kv::bb_segsort((long long int *) keys_ptr, (float *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<long long int, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::segments::kv::bb_segsort((long long int *) keys_ptr, (double *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<long long int, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case FLOAT: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::segments::kv::bb_segsort((float *) keys_ptr, (unsigned char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<float, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::segments::kv::bb_segsort((float *) keys_ptr, (char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<float, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::segments::kv::bb_segsort((float *) keys_ptr, (unsigned short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<float, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::segments::kv::bb_segsort((float *) keys_ptr, (short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<float, short> *) context_ptr);
+          break;
+        case INT:
+          bb::segments::kv::bb_segsort((float *) keys_ptr, (int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<float, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::segments::kv::bb_segsort((float *) keys_ptr, (long long int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<float, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::segments::kv::bb_segsort((float *) keys_ptr, (float *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<float, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::segments::kv::bb_segsort((float *) keys_ptr, (double *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<float, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    case DOUBLE: {
+      switch (value_type) {
+        case BOOLEAN:
+          bb::segments::kv::bb_segsort((double *) keys_ptr, (unsigned char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<double, unsigned char> *) context_ptr);
+          break;
+        case BYTE:
+          bb::segments::kv::bb_segsort((double *) keys_ptr, (char *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<double, char> *) context_ptr);
+          break;
+        case CHAR:
+          bb::segments::kv::bb_segsort((double *) keys_ptr, (unsigned short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<double, unsigned short> *) context_ptr);
+          break;
+        case SHORT:
+          bb::segments::kv::bb_segsort((double *) keys_ptr, (short *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<double, short> *) context_ptr);
+          break;
+        case INT:
+          bb::segments::kv::bb_segsort((double *) keys_ptr, (int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<double, int> *) context_ptr);
+          break;
+        case LONG:
+          bb::segments::kv::bb_segsort((double *) keys_ptr, (long long int *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<double, long long int> *) context_ptr);
+          break;
+        case FLOAT:
+          bb::segments::kv::bb_segsort((double *) keys_ptr, (float *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<double, float> *) context_ptr);
+          break;
+        case DOUBLE:
+          bb::segments::kv::bb_segsort((double *) keys_ptr, (double *) values_ptr, keys_length, (int *) segments_ptr, segments_length, (bb::kv::SortContext<double, double> *) context_ptr);
+          break;
+        default:
+          return JNI_EINVAL;
+      }
+      break;
+    }
+    default:
+      return JNI_EINVAL;
+  }
+  return JNI_OK;
 }
