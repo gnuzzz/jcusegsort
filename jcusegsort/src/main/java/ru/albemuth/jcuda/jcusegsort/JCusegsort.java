@@ -46,7 +46,7 @@ public class JCusegsort {
     }
 
     public static String getVersion() {
-        return "0.8.0";
+        return "0.8.2";
     }
 
     public static String stringFor(int result) {
