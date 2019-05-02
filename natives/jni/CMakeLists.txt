@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project(jcusegsort)
 
-set(PROJECT_VERSION 0.8.1)
+set(PROJECT_VERSION 0.8.2)
 
 if(CMAKE_HOST_WIN32)
     set(PROJECT_OS "windows")
